@@ -4,6 +4,7 @@ const port = 5000
 const bodyParser = require('body-parser')
 const {User} = require('./models/Users')
 
+const config = require('./config/key')
 
 //application/x-www-form-urlencoded 이런걸 분석해서 가져오기 위해 아래 옵션을 추가
 app.use(bodyParser.urlencoded({extended:true}))
@@ -13,7 +14,7 @@ app.use(bodyParser.json())
 
 const monoose = require('mongoose')
 const { json } = require('body-parser')
-monoose.connect('mongodb+srv://circlestar:alstn8775*@cmsmongo.07d76.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+monoose.connect(config.mongoURI,{
     useNewUrlParser: true, useUnifiedTopology:true,useCreateIndex:true,useFindAndModify:false
 }).then(() => console.log('연결됨....'))
 .catch(err => console.log(err))
@@ -40,7 +41,7 @@ user.save((err, userInfo) => {
     //성공하면 success가 true가 뜨고
   })
 })
-
+m 
 
 })
 
