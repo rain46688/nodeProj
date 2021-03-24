@@ -1,3 +1,4 @@
+//export default인건 {}없이 가져올수있다고한다.
 const express = require('express')
 const app = express()
 const port = 5000
@@ -6,6 +7,8 @@ const config = require('./config/key')
 const {User} = require('./models/Users')
 //cookieparser사용하기 토큰 쿠키에 저장
 const cookieParser = require('cookie-parser')
+//미들웨어 auth
+const {auth} = require('./middleware/auth')
 
 
 //application/x-www-form-urlencoded 이런걸 분석해서 가져오기 위해 아래 옵션을 추가
@@ -27,7 +30,7 @@ app.get('/', (req, res) => {
   res.send('Hello World! sfsdfsdfsdf')
 })
 
-app.post('/register',(req, res) =>{
+app.post('/api/users/register',(req, res) =>{
 
     //회원 가입 필요한 정보들을 client에서 가져오면 그것을 DB에 넣어준다.
 
@@ -46,7 +49,7 @@ app.post('/register',(req, res) =>{
   })
 })
 
-app.post('/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
 
       //이메일 디비에서 확인
       //몽고디비에서 제공하는 findOne 함수를 이용해서 찾기
@@ -89,6 +92,25 @@ app.post('/login', (req, res) => {
       })
     })
   })
+})
+
+//auth 미들웨어이다.
+app.get('/api/users/auth',auth,(req,res) =>{
+  console.log("미들웨어 지나서 메소드 실행됨");
+  //여기까지 미들웨어를 통과해왔다는것은 
+  //authentication 이 true라는 말
+  res.status(200).json({
+    _id : req.user._id,
+    isAdmin : req.user.role === 0 ? false : true,
+    isAuth : true,
+    email : req.user.email,
+    name : req.user.name,
+    lastname : req.user.lastname,
+    role : req.user.role,
+    image : req.user.image
+  })
+
+
 })
 
 app.listen(port, () => {

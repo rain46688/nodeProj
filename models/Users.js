@@ -86,8 +86,29 @@ userSchma.methods.generateToken = function(callbackFunction){
         //에러가 없는 경우에는 에러는 null이고 user정보를 넣어줌
         callbackFunction(null, user)
     })
-
 }
+
+//token은 auth.js에서 넘어온 쿠키에 있던 토큰값 현재 로그인한 유저 토큰
+userSchma.statics.findByToken = function(token, callbackFunction){
+    console.log("findByToken 메소드 실행됨");
+    let user = this;
+
+    //토큰을 디코드하기
+    jwt.verify(token, 'cmsweb', function(err, decode_user_id){
+        //유저 아이디를 이용해서 유저를 찾은 다음에
+        //클라이언트에서 가져온 token과 db에 보관된 토큰이 일치하는지 확인
+        user.findOne({"_id" : decode_user_id, "token":token},function(err, userInfo){
+            //근데 이미 로그인해서 토큰이 쿠키에 저장되어있으면
+            //디비랑 비교해서 이미 인증이 된거 아닌가??
+            //로그인할땐 이메일이랑 비밀번호를 비교함
+            if(err) return callbackFunction(err)
+            callbackFunction(null, userInfo)
+        })
+
+
+    })
+}
+
 
 
 const User = mongoose.model('User',userSchma)
