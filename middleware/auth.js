@@ -23,8 +23,6 @@ let auth = (req, res, next) => {
         //다음으로 진행하기 위해 next를 씀
         next();
     });
-
-
 }
 
 //다른곳에서 쓰기 위해

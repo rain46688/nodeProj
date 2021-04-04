@@ -109,9 +109,23 @@ app.get('/api/users/auth',auth,(req,res) =>{
     role : req.user.role,
     image : req.user.image
   })
-
-
 })
+
+//auth를 넣는건 findOneAndDelete 함수를 쓸때 req.user._id를
+//미들웨어 auth에서 넣은 user를 가져와야되서 그렇다함
+app.get('/api/users/logout',auth, (req,res) => {
+
+  console.log("req.user._id : "+req.user._id)
+  //몽고 디비에서 제공하는 함수
+  User.findOneAndUpdate({_id : req.user._id},{token:""},(err, user) => {
+    if(err) return res.json({success:false, err})
+    return res.status(200).send({
+      success:true,
+      message:"로그 아웃 성공"
+    })
+  })
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
