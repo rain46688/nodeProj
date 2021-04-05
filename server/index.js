@@ -26,6 +26,10 @@ monoose.connect(config.mongoURI,{
 .catch(err => console.log(err))
 
 
+app.get('/api/hello', (req,res) =>{
+  res.send('서버에서 보낸 메세지')
+})
+
 app.get('/', (req, res) => {
   res.send('Hello World! sfsdfsdfsdf')
 })

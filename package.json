@@ -2,13 +2,13 @@
   "name": "reactproj2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/index.js",
   "engine": {
     "node": "14.15.0",
     "npm": "6.14.8"
   },
   "scripts": {
-    "start": "nodemon index.js",
+    "backend": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
