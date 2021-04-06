@@ -1,6 +1,7 @@
 //export default인건 {}없이 가져올수있다고한다.
 const express = require('express')
 const app = express()
+//포트 번호
 const port = 5000
 const bodyParser = require('body-parser')
 const config = require('./config/key')
