@@ -92,6 +92,7 @@ app.post('/api/users/login', (req, res) => {
           //토큰을 쿠키나 로컬스토리지에 저장한다
           res.cookie("loginMember",userInfo.token).status(200).json({
             loginSuccess : true,
+            userId : userInfo._id,
             message:"로그인 성공"
           })
       })

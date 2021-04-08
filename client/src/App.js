@@ -27,6 +27,8 @@ function App() {
         {/* <Route exact path="/"><LandingPage/></Route> 
           이거랑 이거랑 같은것
           <Route exact path="/" component={LandingPage}/>
+
+          맵핑값 이렇게 정한것 스프링이랑 비슷함
         */}
           <Route exact path="/" component={LandingPage}/>
           <Route exact path="/login" component={LoginPage}/>
