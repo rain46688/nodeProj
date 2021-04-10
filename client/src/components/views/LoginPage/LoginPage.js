@@ -34,7 +34,8 @@ function LoginPage(props) {
             email : Email,
             password : Password
         }
-        //loginUser라는 액션을 만들어줘야된다.
+        //loginUser라는 액션을 user_acction.js에만들어줘야된다.
+        //redux를 안쓰면 여기서 그냥 axios해서 하면됨. redux를 쓰면 좀 복잡해지긴한다함
         dispatch(loginUser(body)).then(response =>{
             if(response.payload.loginSuccess){
                 //매핑 이동 props를 이용함 
