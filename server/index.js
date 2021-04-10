@@ -101,6 +101,9 @@ app.post('/api/users/login', (req, res) => {
 })
 
 //auth 미들웨어이다.
+// role 1 어드민 role 2 특정 부서 어드민
+// role 0 일반유저 role 0이 아니면 관리자
+// 이건 만드는 사람이 정하는것
 app.get('/api/users/auth',auth,(req,res) =>{
   console.log("미들웨어 지나서 메소드 실행됨");
   //여기까지 미들웨어를 통과해왔다는것은 

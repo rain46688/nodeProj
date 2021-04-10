@@ -10,6 +10,8 @@ import {
 import LandingPage from './components/views/LandingPage/LandingPage'
 import LoginPage from './components/views/LoginPage/LoginPage'
 import RegisterPage from './components/views/RegisterPage/RegisterPage'
+//auth 사용하기 
+import Auth from './hoc/auth'
 
 function App() {
   return (
@@ -30,9 +32,16 @@ function App() {
 
           맵핑값 이렇게 정한것 스프링이랑 비슷함
         */}
-          <Route exact path="/" component={LandingPage}/>
-          <Route exact path="/login" component={LoginPage}/>
-          <Route exact path="/register" component={RegisterPage}/>
+        {/* auth 사용하려면 Auth로 컴포넌트를 감싸줘야된다.
+          auth.js에 
+          //adminRoute = null는 어드민인지 판단하는건데 true면 어드민이고 아무것도 안넣으면 자동 null넣는다는 문법이라함
+          export default function (SpecificComponent, option, adminRoute = null){
+            이거 파라미터에 맞게 넣는것임
+      
+        */}
+          <Route exact path="/" component={Auth(LandingPage,null)}/>
+          <Route exact path="/login" component={Auth(LoginPage,false)}/>
+          <Route exact path="/register" component={Auth(RegisterPage,false)}/>
         </Switch>
       </div>
     </Router>

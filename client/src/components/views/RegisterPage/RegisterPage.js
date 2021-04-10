@@ -3,7 +3,7 @@ import React, {useState} from 'react'//useState는 여기서 가져올수있음
 //redux 사용하려면 필요`
 import {useDispatch} from 'react-redux'
 import {registerUser} from '../../../_actions/user_action'
-
+import {withRouter} from 'react-router-dom'
 
 function RegisterPage(props) {
 
@@ -91,4 +91,4 @@ function RegisterPage(props) {
     )
 }
 
-export default RegisterPage
+export default withRouter(RegisterPage)
